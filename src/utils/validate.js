@@ -1,4 +1,4 @@
-import { ValidationError } from "../errors/TypeError";
+import { ValidationError } from '../errors/TypeError';
 
 
 export const validateDate = (date) => {
@@ -6,4 +6,4 @@ export const validateDate = (date) => {
     if(!dateRegEx.test(date)) {
         throw new ValidationError('La fecha no es valida', `la fecha ${date} debe tener el formato YYYY-MM-DD`);
     }
-}
+};

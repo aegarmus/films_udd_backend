@@ -1,19 +1,26 @@
-import { NotFoundError } from '../errors/TypeError.js';
-import { Peliculas } from '../model/Peliculas.model.js';
+import { getAllPeliculasService, getPeliculasByIdService } from '../services/peliculas.service.js';
 
 export const getAllPeliculas = async(req, res, next) => {
     try {
-        const peliculas = await Peliculas.find();
-
-        if(peliculas.length === 0 || peliculas === null) {
-            throw new NotFoundError(
-                'No pudimos encontrar las peliculas', 
-                'No pudimos encontrar peliculas en la base de datos en la colección de peliculas'
-            );
-        }
+        const peliculas = await getAllPeliculasService();
 
         res.status(200).json({
             message: 'Peliculas encontradas con éxito',
+            statusCode: 200,
+            data: peliculas,
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const getPeliculasById = async(req, res, next) => {
+    try {
+        const { id } = req.params;
+        const peliculas = await getPeliculasByIdService(id);
+
+        res.status(200).json({
+            message: `Peliculas con el id: ${id} encontrada con éxito`,
             statusCode: 200,
             data: peliculas,
         });
