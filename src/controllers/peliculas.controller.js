@@ -1,4 +1,4 @@
-import { getAllPeliculasService, getPeliculasByIdService } from '../services/peliculas.service.js';
+import { createPeliculasService, getAllPeliculasService, getPeliculasByIdService } from '../services/peliculas.service.js';
 
 export const getAllPeliculas = async(req, res, next) => {
     try {
@@ -22,6 +22,21 @@ export const getPeliculasById = async(req, res, next) => {
         res.status(200).json({
             message: `Peliculas con el id: ${id} encontrada con éxito`,
             statusCode: 200,
+            data: peliculas,
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const createPeliculas = async(req, res, next) => {
+    try {
+        const dataPelicula = req.body;
+        const peliculas = await createPeliculasService(dataPelicula);
+
+        res.status(201).json({
+            message: 'Pelicula creada con éxito',
+            statusCode: 201,
             data: peliculas,
         });
     } catch (error) {

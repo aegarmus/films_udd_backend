@@ -37,3 +37,14 @@ export const getPeliculasByIdService = async (id) => {
         throw new PeliculasError('Error al intentar obtener una pelicula por ID', 500, error);
     }
 };
+
+export const createPeliculasService = async(dataPelicula) => {
+    try {
+        //TENEMOS QUE VALIDAR DATOS!!!! 
+        const pelicula =  await Peliculas.create(dataPelicula);
+
+        return pelicula;
+    } catch (error) {
+        throw new PeliculasError('Error al intentar crear una pelicula', 500, error);
+    }
+};
