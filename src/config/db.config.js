@@ -3,6 +3,7 @@
 
 import mongoose from 'mongoose';
 import { envs } from './envs.config.js';
+import { DataBaseError } from '../errors/TypeError.js';
 
 const { db } = envs; 
 
@@ -11,7 +12,7 @@ export const dbConnect = async() => {
         await mongoose.connect(db.uri);
         console.log('Nos conectamos con MongoDB!! :D 🛸');
     } catch (error) {
-        console.error('No nos pudimos conectar a MongoDB :c 😱', error);
+        throw new DataBaseError('No nos pudimos conectar a la base de datos de Mongo :c', 500, error);
     }
 };
  
