@@ -9,8 +9,16 @@ const peliculasSchema = new Schema({
     director: { type: String, required: true },
     puntaje_critica: { type: Types.Double, required: true },
     gano_oscar: { type: Boolean, required: true },
-    isActive: { type: Boolean, default: true }
-}, { versionKey: false, timestamps: false });
+    isActive: { type: Boolean, default: true }  
+}, {
+    toJSON: {
+        transform: (doc, ret) => {
+            delete ret.isActive;
+            return ret;
+        },
+    }, 
+    versionKey: false, 
+    timestamps: false });
 
 export const Peliculas = mongoose.model('peliculas', peliculasSchema);
 

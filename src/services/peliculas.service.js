@@ -15,7 +15,8 @@ export const getAllPeliculasService = async () => {
             peliculas,
             'No pudimos encontrar las peliculas',
             'No pudimos encontrar peliculas en la base de datos en la colección de peliculas'
-        );
+        ); 
+ 
 
         return peliculas;
     } catch (error) {
