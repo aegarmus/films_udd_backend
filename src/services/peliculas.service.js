@@ -9,8 +9,7 @@ import { notFoundActiveData, notFoundData } from '../utils/validate.js';
 export const getAllPeliculasService = async () => {
     try {
         const peliculas = await Peliculas.find({ isActive: true });
-        console.log(peliculas);
-
+        
         notFoundActiveData(
             peliculas,
             'No pudimos encontrar las peliculas',

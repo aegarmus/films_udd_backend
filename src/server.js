@@ -1,5 +1,5 @@
 import express from 'express';
-
+import cors from 'cors';
 import { envs } from './config/envs.config.js'; 
 import { dbConnect } from './config/db.config.js';
 
@@ -11,6 +11,7 @@ const app = express();
 dbConnect();
 
 //Middlewares de CORS
+app.use(cors());
 
 //Middlewares para parsear el body a JSON
 app.use(express.json());
