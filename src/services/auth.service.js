@@ -17,6 +17,7 @@ export const registerService = async({
     telefono, 
     fecha_nacimiento, 
     password, 
+    imagen,
     isAdmin = false
 }) => {
     try {
@@ -31,6 +32,7 @@ export const registerService = async({
             correo, 
             telefono, 
             fecha_nacimiento, 
+            imagen,
             isAdmin
         );
         console.log(userData);

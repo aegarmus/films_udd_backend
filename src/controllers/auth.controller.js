@@ -1,10 +1,19 @@
 import { getAllUsersService, loginService, registerService } from '../services/auth.service.js';
+import { buildFileUrl } from '../utils/files/buildFileUrl.js';
 import { response } from '../utils/templates/response.template.js';
 
 
 export const register = async(req, res, next) => {
     try {
-        const userData = req.body;
+
+        let imageUrl = '';
+        if(req.file) imageUrl = buildFileUrl(req, req.file.filename, 'usuarios');
+
+        const userData = {
+            ...req.body,
+            imagen: imageUrl
+        };
+        
         const user = await registerService(userData);
         response(res, user, 201, 'Usuario creado con éxito');
     } catch (error) {

@@ -9,6 +9,7 @@ import {
     restorePeliculaByIdService, 
     updatePeliculaByIdService 
 } from '../services/peliculas.service.js';
+import { buildFileUrl } from '../utils/files/buildFileUrl.js';
 
 import { response } from '../utils/templates/response.template.js';
 
@@ -38,7 +39,14 @@ export const getPeliculasById = async(req, res, next) => {
 
 export const createPeliculas = async(req, res, next) => {
     try {
-        const dataPelicula = req.body;
+        let imageUrl = '';
+        if(req.file) imageUrl = buildFileUrl(req, req.file.filename, 'peliculas');
+
+        const dataPelicula = {
+            ...req.body,
+            imagen: imageUrl
+        };
+
         const peliculas = await createPeliculasService(dataPelicula);
 
         response(res, peliculas, 201, 'Pelicula creada con éxito');

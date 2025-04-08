@@ -30,6 +30,13 @@ export class AuthError extends CustomError {
     }
 }
 
+
+export class FileServiceError extends CustomError {
+    constructor(message, statusCode, details) {
+        super(message || 'Error en el servicio de archivos', statusCode || 500, details);
+    }
+};
+
 export class InternalServerError extends CustomError {
     constructor(message, statusCode, details) {
         super(message || 'Error interno en el servidor', statusCode || 500, details);

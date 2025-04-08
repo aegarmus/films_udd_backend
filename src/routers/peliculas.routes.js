@@ -2,12 +2,13 @@ import { Router } from 'express';
 import { createPeliculas, deletePeliculaById, getAllPeliculas, getDeleteAllPeliculas, getDeletePeliculasById, getPeliculasById, permaDeletePeliculaById, restorePeliculaById, updatePeliculaById } from '../controllers/peliculas.controller.js';
 import { authMiddleware } from '../middlewares/auth.middleware.js';
 import { verifyAdmin } from '../middlewares/verifyAdmin.middleware.js';
+import { uploadPhoto } from '../middlewares/uploadFile.middleware.js';
 
 const router = Router();
 
 router.get('/', getAllPeliculas);
 router.get('/:id', getPeliculasById);
-router.post('/', authMiddleware, createPeliculas);
+router.post('/', authMiddleware, uploadPhoto('peliculas', 'file'), createPeliculas);
 router.put('/:id', authMiddleware, updatePeliculaById);
 router.delete('/admin/perma/:id', authMiddleware, verifyAdmin, permaDeletePeliculaById);
 router.delete('/:id', deletePeliculaById);
