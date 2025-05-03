@@ -19,6 +19,8 @@ export const errorHandler = (err, req, res, _next) => {
         details: err.details
     };
 
+    console.error(err);
+
     console.error(
         `ERROR: ${errorResponse.message} ----- Deatils: ${errorResponse.details} ----- Status: ${errorResponse.statusCode}`
     );

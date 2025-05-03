@@ -23,8 +23,6 @@ export const registerService = async({
     try {
         const hashedPassword = await hashPassword(password);
 
-        console.log(hashedPassword);
-
         //SOLID
         const userData = formateUserData(hashedPassword, 
             nombre, 
@@ -35,7 +33,6 @@ export const registerService = async({
             imagen,
             isAdmin
         );
-        console.log(userData);
 
         const user = await Usuario.create(userData);
 
@@ -50,7 +47,7 @@ export const registerService = async({
 //SH256 -> SMAC-SSH
 
 export const loginService = async({ correo, password }) => {
-    try {
+    try {    
         const user = await Usuario.findOne({ correo }); 
         
         const passwordMatch = await comparePassword(password, user.password);
